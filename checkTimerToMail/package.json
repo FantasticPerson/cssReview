@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "node-schedule": "^1.2.0",
+    "nodemailer": "^2.6.4",
+    "request": "^2.79.0"
+  }
+}
