@@ -120,6 +120,15 @@ CheckApi.prototype = {
                 console.log(error);
             }
         })
+    },
+    checkServer:function(mailTo,sendSMS){
+        console.log('check njjtzs server');
+        request(request_url,function(error,response,body) {
+            if (error || !(response.statusCode == 200)) {
+                mailTo("数据异常通知[南京交通拥堵指数]", "[南京交通拥堵指数]接口无法访问，请及时查看相关日志。", index_url, '接口无法访问');
+                sendSMS("数据异常通知[南京交通拥堵指数]接口无法访问");
+            }
+        });
     }
 };
 

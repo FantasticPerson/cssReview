@@ -1,4 +1,5 @@
 'use strict';
+var encodeURL = require('encodeurl');
 var mailer = require('nodemailer');
 var smtpTransport = require('nodemailer-smtp-transport');
 var schedule = require("node-schedule");
@@ -10,7 +11,8 @@ checkKq.start();
 var checkJtDay = require('./processes/njjtzsDay').checkInit();
 checkJtDay.start();
 //接口和网站访问首页地址 //'3122859003@qq.com,1240172019@qq.com,guying@njnet.gov.cn,dengling@njnet.gov.cn'
-var mailTo = '1240172019@qq.com',//3122859003@qq.com,//,904179598@qq.com
+// var mailTo = "1240172019@qq.com",
+var mailTo = '358968224@qq.com,3122859003@qq.com,1240172019@qq.com,guying@njnet.gov.cn,dengling@njnet.gov.cn',//3122859003@qq.com,//,904179598@qq.com
 	sendFromConfig = {
         user: '3122859003@qq.com',
         pass: 'dkfjouznvuesdeef' //qq邮箱生成的授权码 //dkfjouznvuesdeef
@@ -31,26 +33,34 @@ Main.prototype = {
 	taskerStart: function() {
 		console.log("Task start[OK]");
 		var rule = new schedule.RecurrenceRule(),
+			rule1 = new schedule.RecurrenceRule(),
 			that = this;
-		// rule.second = [0,5,15,25,35,45,55];//for debug
 		// var minutesArr = [];
 		// for(var i=0;i<60;i++){
 		// 	minutesArr.push(i);
 		// }
 		// rule.minute = minutesArr;
-		rule.minute = [0,5,10,15,20,25,30,35,40,45,50,55];//[29,59];//online used
+		// rule1.minute =minutesArr;
 
+		rule.minute = [29,59];
+		rule1.minute = [0,5,10,15,20,25,30,35,40,45,50,55];
 
 		this.j = schedule.scheduleJob(rule, function() {
 			checkJt.check(that.sendMsgTo,that.sendPhoneMsgTo);
 			checkKq.check(that.sendMsgTo,that.sendPhoneMsgTo);
             checkJtDay.check(that.sendMsgTo,that.sendPhoneMsgTo);
-			// that.checkApi();
-		})
+		});
+
+		this.f=schedule.scheduleJob(rule1,function(){
+			checkJt.checkServer(that.sendMsgTo,that.sendPhoneMsgTo);
+            checkKq.checkServer(that.sendMsgTo,that.sendPhoneMsgTo);
+            checkJtDay.checkServer(that.sendMsgTo,that.sendPhoneMsgTo);
+		});
 	},
 	//取消定时任务
 	tastkerStop:function(){
 		this.j.cancel();
+        this.f.cancel();
 	},
 	//重启定时任务
 	tastkerRestart:function(){
@@ -58,7 +68,7 @@ Main.prototype = {
 		this.taskerStart();
 	},
 	//发送邮件
-	sendMsgTo: function(subject,specifyMsg,indexUrl,msg,mails=null) {
+	sendMsgTo: function(subject,specifyMsg,indexUrl,msg) {
 		console.log(msg);
 		//tqqqwxiqzwvujadh pop3
 		//hlfpxlodlwpgigii imap
@@ -70,7 +80,7 @@ Main.prototype = {
 		,that = this;
 		transport.sendMail({
 			"from": "3122859003@qq.com",
-			"to": mails ? mails : mailTo,
+			"to": mailTo,
 			"subject": subject,
 			"generateTextFromHTML": true,
 			"html": "<p>" + specifyMsg + "</p>"
@@ -90,12 +100,12 @@ Main.prototype = {
 	},
 	sendPhoneMsgTo:function(msg){
 		var baseUrl = 'http://10.101.2.71:8999/CallSMSPlatform/sendMsg';
-		var phoneArr = ['13818184608'];//'17798860825','18994295576','15962847365'
-        var url = baseUrl+'?phoneNum='+phoneArr.join(';')+'&msgContent='+msg;
+		// var phoneArr = ['13818184608'];
+		var phoneArr = ['13818184608','18115180746','18806293606'];//'17798860825','18994295576','15962847365'
+        var url = baseUrl+'?phoneNum='+phoneArr.join(';')+'&msgContent='+encodeURL(msg);
 		request(url,function(error,response,body){
-			if(error){
-				console.log('send sms fail:'+error);
-                this.sendMsgTo('发送短信失败','fail','','','3122859003@qq.com,1240172019@qq.com');
+			if(error || response.statusCode != 200){
+				console.log('send sms fail');
 			}
         })
 	}
