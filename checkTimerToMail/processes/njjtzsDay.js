@@ -14,6 +14,12 @@ function getHourMinuteFromTime(Time){
     return arr;
 }
 
+function getIsDayTime(){
+    var date = new Date();
+    var hours =  date.getHours();
+    return hours >=8 && hours <= 18;
+}
+
 exports.checkInit = function(){
     return new CheckApi();
 };
@@ -41,9 +47,11 @@ CheckApi.prototype = {
                         console.log("[南京交通拥堵指数]获取列表的接口[By Day] time error");
                         if(that.errorCount < 5) {
                             that.errorCount++;
-                            console.log(dayDate, new Date(previousDay));
-                            sendMail("数据异常通知[南京交通拥堵指数]", "[南京交通拥堵指数]获取指数列表[By Day]有问题，没有最新数据。请及时查看相关日志。", index_url, JSON.stringify(dataObj.Data));
-                            sendSMS("数据异常通知[南京交通拥堵指数]");
+                            if(that.errorCount == 1 || getIsDayTime()) {
+                                console.log(dayDate, new Date(previousDay));
+                                sendMail("数据异常通知[南京交通拥堵指数]", "[南京交通拥堵指数]获取指数列表[By Day]有问题，没有最新数据。请及时查看相关日志。", index_url, JSON.stringify(dataObj.Data));
+                                sendSMS("数据异常通知[南京交通拥堵指数]");
+                            }
                         }
                     } else {
                         if(that.errorCount > 0){
@@ -57,8 +65,10 @@ CheckApi.prototype = {
                     console.log("[南京交通拥堵指数]获取列表的接口[By Day]");
                     if (that.errorCount < 5) {
                         that.errorCount++;
-                        sendMail("数据异常通知[南京交通拥堵指数]", "[南京交通拥堵指数]获取指数列表[By Day]有问题，请及时查看相关日志。", index_url, '[南京交通拥堵指数]获取指数列表[By Day]有问题');
-                        sendSMS("数据异常通知[南京交通拥堵指数]");
+                        if(that.errorCount == 1 || getIsDayTime()) {
+                            sendMail("数据异常通知[南京交通拥堵指数]", "[南京交通拥堵指数]获取指数列表[By Day]有问题，请及时查看相关日志。", index_url, '[南京交通拥堵指数]获取指数列表[By Day]有问题');
+                            sendSMS("数据异常通知[南京交通拥堵指数]");
+                        }
                     }
                 }
             } else {
@@ -67,8 +77,10 @@ CheckApi.prototype = {
                         console.log("[南京交通拥堵指数]获取列表的接口[By Day]已经超过一个小时没有接收到数据了");
                         if (that.errorCount < 5) {
                             that.errorCount++;
-                            sendMail("数据异常通知[南京交通拥堵指数]", "[南京交通拥堵指数]获取列表的接口[By Day]已经超过一个小时没有接收到数据了，请及时查看相关日志。", index_url, '已经超过一个小时没有获取到数据了');
-                            sendSMS("数据异常通知[南京交通拥堵指数]");
+                            if(that.errorCount == 1 || getIsDayTime()) {
+                                sendMail("数据异常通知[南京交通拥堵指数]", "[南京交通拥堵指数]获取列表的接口[By Day]已经超过一个小时没有接收到数据了，请及时查看相关日志。", index_url, '已经超过一个小时没有获取到数据了');
+                                sendSMS("数据异常通知[南京交通拥堵指数]");
+                            }
                         }
                     }
                 } else {
@@ -79,11 +91,17 @@ CheckApi.prototype = {
         })
     },
     checkServer:function(mailTo,sendSMS){
+        var that = this;
         console.log('check njjtzs server');
         request(request_url,function(error,response,body) {
             if (error || !(response.statusCode == 200)) {
-                mailTo("数据异常通知[南京交通拥堵指数]", "[南京交通拥堵指数]获取列表的接口[By Day]接口无法访问，请及时查看相关日志。", index_url, '接口无法访问');
-                sendSMS("数据异常通知[南京交通拥堵指数] 接口无法访问");
+                if (that.errorCount < 5) {
+                    that.errorCount++;
+                    if(that.errorCount == 1 || getIsDayTime()) {
+                        mailTo("服务异常通知[南京交通拥堵指数]", "[南京交通拥堵指数]获取列表的接口[By Day]接口无法访问，请及时查看相关日志。", index_url, '接口无法访问');
+                        sendSMS("服务异常通知[南京交通拥堵指数] 服务异常");
+                    }
+                }
             }
         });
     }

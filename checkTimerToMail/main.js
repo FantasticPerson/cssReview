@@ -48,13 +48,13 @@ Main.prototype = {
 		this.j = schedule.scheduleJob(rule, function() {
 			checkJt.check(that.sendMsgTo,that.sendPhoneMsgTo);
 			checkKq.check(that.sendMsgTo,that.sendPhoneMsgTo);
-            checkJtDay.check(that.sendMsgTo,that.sendPhoneMsgTo);
+            // checkJtDay.check(that.sendMsgTo,that.sendPhoneMsgTo);
 		});
 
 		this.f=schedule.scheduleJob(rule1,function(){
 			checkJt.checkServer(that.sendMsgTo,that.sendPhoneMsgTo);
             checkKq.checkServer(that.sendMsgTo,that.sendPhoneMsgTo);
-            checkJtDay.checkServer(that.sendMsgTo,that.sendPhoneMsgTo);
+            // checkJtDay.checkServer(that.sendMsgTo,that.sendPhoneMsgTo);
 		});
 	},
 	//取消定时任务

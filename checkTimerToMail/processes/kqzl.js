@@ -18,6 +18,12 @@ function checkTimeIsLegal(time){
     // return ((curtTime.getMonth() == getTime.getMonth()) && (curtTime.getDate() == getTime.getDate()));
 }
 
+function getIsDayTime(){
+    var date = new Date();
+    var hours =  date.getHours();
+    return hours >=8 && hours <= 18;
+}
+
 exports.checkInit = function(){
     return new CheckApi();
 };
@@ -50,8 +56,10 @@ CheckApi.prototype = {
                         console.log("[南京空气污染指数]数据接口出现异常数据");
                         if (that.errorCount < 5) {
                             that.errorCount++;
-                            sendMail("数据异常通知[南京空气污染指数]", "[南京空气污染指数]数据接口出现异常数据，请及时查看相关日志。", index_url, JSON.stringify(errorArr));
-                            sendSMS("数据异常通知[南京空气污染指数]");
+                            if(that.errorCount == 1 || getIsDayTime()) {
+                                sendMail("数据异常通知[南京空气污染指数]", "[南京空气污染指数]数据接口出现异常数据，请及时查看相关日志。", index_url, JSON.stringify(errorArr));
+                                sendSMS("数据异常通知[南京空气污染指数]");
+                            }
                         }
                     } else {
                         if(that.errorCount > 0){
@@ -67,8 +75,10 @@ CheckApi.prototype = {
                         console.log("[南京空气污染指数]已经超过一个小时没有接收到数据了");
                         if (that.errorCount < 5) {
                             that.errorCount++;
-                            sendMail("数据异常通知[南京空气污染指数]", "[南京空气污染指数]已经超过一个小时没有接收到数据了，请及时查看相关日志。", index_url, '已经超过一个小时没有获取到数据了');
-                            sendSMS("数据异常通知[南京空气污染指数]");
+                            if(that.errorCount == 1 || getIsDayTime()) {
+                                sendMail("数据异常通知[南京空气污染指数]", "[南京空气污染指数]已经超过一个小时没有接收到数据了，请及时查看相关日志。", index_url, '已经超过一个小时没有获取到数据了');
+                                sendSMS("数据异常通知[南京空气污染指数]");
+                            }
                         }
                     }
                 } else {
@@ -82,8 +92,13 @@ CheckApi.prototype = {
         console.log('check kqzl server');
         request(request_url,function(error,response,body){
             if(error || !(response.statusCode == 200)){
-                mailTo("数据异常通知[南京空气污染指数]", "[南京空气污染指数]接口无法访问，请及时查看相关日志。", index_url, '接口无法访问 ');
-                sendSMS("数据异常通知[南京空气污染指数]接口无法访问");
+                if (that.errorCount < 5) {
+                    that.errorCount++;
+                    if (that.errorCount == 1 || getIsDayTime()) {
+                        mailTo("服务异常通知[南京空气污染指数]服务异常", "服务异常", index_url, '服务异常，接口无法访问');
+                        sendSMS("服务异常通知[南京空气污染指数]接口无法访问");
+                    }
+                }
             }
         });
     }
