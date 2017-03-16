@@ -1,6 +1,6 @@
-##offset-path
+## offset-path
 
-####CSS代码：
+#### CSS代码：
 ```
 .horse-run {
     /* 之前语法 始于2015年9月，M58版本会移除，大约2017年4月 */
@@ -19,7 +19,7 @@
   100% { offset-distance: 100%;}
 }
 ```
-####HTML代码：
+#### HTML代码：
 ```
 <img src="http://www.zhangxinxu.com/study/201702/horse.png" width="40" height="43" class="horse-run">
 <svg width="280" height="150" viewBox="0 0 280 150">

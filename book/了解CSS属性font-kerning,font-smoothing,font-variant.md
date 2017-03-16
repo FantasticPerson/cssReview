@@ -1,5 +1,5 @@
-##了解CSS属性font-kerning,font-smoothing,font-variant
-####一、字距调整属性font-kerning
+## 了解CSS属性font-kerning,font-smoothing,font-variant
+#### 一、字距调整属性font-kerning
 font-kerning应该算是一个CSS3属性，主要作用是调整字形间距，且基本上是英文字符形状的间距，因为英文字符形状都是不规则的，有宽有窄，有的圆乎乎，有的棱角分明，就会导致排列在一起的时候疏密不一致，而font-kerning可以有效利用字符形状间的间隙，使字形之间的空间更加相似，如下图所示（图来自MDN文档）：
 ```
 font-kerning: auto | normal | none
@@ -15,7 +15,7 @@ none
     必须是具有字距调整信息的OpenType字体①才有用，如果字体文件没有字距调整信息或者不是OpenType字体，都是没效果的。
     IE浏览器，包括edge版本都是没效果的，iOS目前需要私有前缀。
 ```
-####二、文字平滑属性font-smoothing
+#### 二、文字平滑属性font-smoothing
 ```
 实际上，Chrome等webkit浏览器使用的是-webkit-font-smoothing，Firefox浏览器下是-moz-osx-font-smoothing，
 
@@ -44,5 +44,5 @@ body { -webkit-font-smoothing: antialiased; }
     body { -webkit-font-smoothing: subpixel-antialiased; }
 }
 ```
-####三、小体型大写字母font-variant
+#### 三、小体型大写字母font-variant
 两个属性值，要么normal要么small-caps，font-variant:small-caps
