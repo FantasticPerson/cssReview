@@ -57,7 +57,7 @@ CheckApi.prototype = {
                         if(that.errorCount > 0){
                             console.log("[南京交通拥堵指数]获取列表的接口[By Day]恢复正常。");
                             sendMail("数据异常通知[南京交通拥堵指数]", "[南京交通拥堵指数]获取指数列表[By Day]恢复正常。", index_url, '');
-                            sendSMS("数据异常通知[南京交通拥堵指数]");
+                            sendSMS("数据恢复正常通知[南京交通拥堵指数]");
                         }
                         that.errorCount = 0;
                     }

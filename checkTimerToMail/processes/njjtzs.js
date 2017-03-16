@@ -101,7 +101,7 @@ CheckApi.prototype = {
                     } else {
                         if(that.errorCount > 0){
                             sendMail("数据异常通知[南京交通拥堵每日指数]", "[南京交通拥堵每日指数]数据接口恢复正常。", index_url, '');
-                            sendSMS("数据异常通知[南京交通拥堵每日指数]");
+                            sendSMS("数据恢复正常通知[南京交通拥堵每日指数]");
                         }
                         that.errorCount = 0;
                     }
@@ -133,6 +133,7 @@ CheckApi.prototype = {
     },
     checkServer:function(mailTo,sendSMS){
         console.log('check njjtzs server');
+        var that = this;
         request(request_url,function(error,response,body) {
             if (error || !(response.statusCode == 200)) {
                 if (that.errorCount < 5) {
