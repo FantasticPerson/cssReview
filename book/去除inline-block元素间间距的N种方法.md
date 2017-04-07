@@ -90,7 +90,7 @@
 }
 ```
 
-####　八、其他成品方法
+####　其他成品方法
 ```
  下面展示的是YUI 3 CSS Grids 使用letter-spacing和word-spacing去除格栅单元见间隔方法（注意，其针对的是block水平的元素，因此对IE8-浏览器做了hack处理）：
 
