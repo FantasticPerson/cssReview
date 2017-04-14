@@ -101,7 +101,7 @@ Main.prototype = {
 	sendPhoneMsgTo:function(msg){
 		var baseUrl = 'http://10.101.2.71:8999/CallSMSPlatform/sendMsg';
 		// var phoneArr = ['13818184608'];
-		var phoneArr = ['13818184608','18115180746','18806293606'];//'17798860825','18994295576','15962847365'
+		var phoneArr = ['13818184608','18115180746','18806293606','13815892936','18751897319'];//'17798860825','18994295576','15962847365','13815892936','18751897319'
         var url = baseUrl+'?phoneNum='+phoneArr.join(';')+'&msgContent='+encodeURL(msg);
 		request(url,function(error,response,body){
 			if(error || response.statusCode != 200){
