@@ -98,8 +98,8 @@ CheckApi.prototype = {
                 if (that.errorCount < 5) {
                     that.errorCount++;
                     if(that.errorCount == 1 || getIsDayTime()) {
-                        mailTo("[南京交通指数APP]交通拥堵指数服务异常通知[中威科技]", "[南京交通指数]服务异常通知，请及时查看相关日志。", index_url, '接口无法访问');
-                        sendSMS("[南京交通指数APP]交通拥堵指数服务异常通知[中威科技]");
+                        mailTo("[南京交通指数APP]服务异常通知[中威科技]", "[南京交通指数]服务异常通知，请及时查看相关日志。", index_url, '接口无法访问');
+                        sendSMS("[南京交通指数APP]服务异常通知[中威科技]");
                     }
                 }
             }

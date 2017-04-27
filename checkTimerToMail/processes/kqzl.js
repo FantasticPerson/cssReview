@@ -97,8 +97,8 @@ CheckApi.prototype = {
                 if (that.errorCount < 5) {
                     that.errorCount++;
                     if (that.errorCount == 1 || getIsDayTime()) {
-                        mailTo("[南京智慧环保APP]空气质量AQI服务异常通知[中威科技]", "服务异常", index_url, '服务异常，接口无法访问');
-                        sendSMS("[南京智慧环保APP]空气质量AQI服务异常通知[中威科技]");
+                        mailTo("[南京智慧环保APP]服务异常通知[中威科技]", "服务异常", index_url, '服务异常，接口无法访问');
+                        sendSMS("[南京智慧环保APP]服务异常通知[中威科技]");
                     }
                 }
             }
