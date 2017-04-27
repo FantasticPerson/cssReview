@@ -54,18 +54,18 @@ CheckApi.prototype = {
                     }
                     console.log(errorArr,JSON.stringify(errorArr));
                     if(errorArr.length>0) {
-                        console.log("[南京空气污染指数]数据接口出现异常数据");
+                        console.log("[南京智慧环保APP]空气质量AQI数据异常通知[中威科技]");
                         if (that.errorCount < 5) {
                             that.errorCount++;
                             if(that.errorCount == 1 || getIsDayTime()) {
-                                sendMail("[南京智慧环保]数据异常通知", "[南京智慧环保]数据出现异常，请及时查看相关日志。", index_url, JSON.stringify(errorArr));
-                                sendSMS("[南京智慧环保]数据异常通知");
+                                sendMail("[南京智慧环保APP]空气质量AQI数据异常通知[中威科技]", "[南京智慧环保]数据出现异常，请及时查看相关日志。", index_url, JSON.stringify(errorArr));
+                                sendSMS("[南京智慧环保APP]空气质量AQI数据异常通知[中威科技]");
                             }
                         }
                     } else {
                         if(that.errorCount > 0){
-                            sendMail(" [南京智慧环保]数据恢复正常", " [南京智慧环保]数据恢复正常。", index_url, '');
-                            sendSMS(" [南京智慧环保]数据恢复正常");
+                            sendMail("[南京智慧环保APP]空气质量AQI数据恢复正常[中威科技]", " [南京智慧环保]数据恢复正常。", index_url, '');
+                            sendSMS("[南京智慧环保APP]空气质量AQI数据恢复正常[中威科技]");
                         }
                         that.errorCount=0;
                     }
@@ -77,8 +77,8 @@ CheckApi.prototype = {
                         if (that.errorCount < 5) {
                             that.errorCount++;
                             if(that.errorCount == 1 || getIsDayTime()) {
-                                sendMail("[南京智慧环保]数据异常通知", "[南京智慧环保]数据出现异常，请及时查看相关日志。", index_url, '已经超过一个小时没有获取到数据了');
-                                sendSMS("[南京智慧环保]数据异常通知");
+                                sendMail("[南京智慧环保APP]空气质量AQI数据异常通知[中威科技]", "[南京智慧环保]数据出现异常，请及时查看相关日志。", index_url, '已经超过一个小时没有获取到数据了');
+                                sendSMS("[南京智慧环保APP]空气质量AQI数据异常通知[中威科技]");
                             }
                         }
                     }
@@ -97,8 +97,8 @@ CheckApi.prototype = {
                 if (that.errorCount < 5) {
                     that.errorCount++;
                     if (that.errorCount == 1 || getIsDayTime()) {
-                        mailTo("[南京智慧环保]服务异常通知", "服务异常", index_url, '服务异常，接口无法访问');
-                        sendSMS("[南京智慧环保]服务异常通知");
+                        mailTo("[南京智慧环保APP]空气质量AQI服务异常通知[中威科技]", "服务异常", index_url, '服务异常，接口无法访问');
+                        sendSMS("[南京智慧环保APP]空气质量AQI服务异常通知[中威科技]");
                     }
                 }
             }
