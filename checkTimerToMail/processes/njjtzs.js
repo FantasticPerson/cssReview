@@ -120,7 +120,7 @@ CheckApi.prototype = {
                     }
                     that.errorCount = 0;
                 }
-            } else {
+            } /*else {
                 if(that.lastNotGetTime){
                     if(Date.now() - that.lastNotGetTime > 3600000) {
                         console.log("[南京交通拥堵每日指数]已经超过一个小时没有接收到数据了");
@@ -136,11 +136,11 @@ CheckApi.prototype = {
                     that.lastNotGetTime = Date.now();
                 }
                 console.log(error);
-            }
+            }*/
         })
     },
     checkServer:function(mailTo,sendSMS){
-        console.log('check njjtzs server');
+        /*console.log('check njjtzs server');
         var that = this;
         request(request_url,function(error,response,body) {
             if (error || !(response.statusCode == 200)) {
@@ -152,7 +152,7 @@ CheckApi.prototype = {
                     }
                 }
             }
-        });
+        });*/
     }
 };
 

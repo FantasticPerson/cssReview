@@ -71,7 +71,7 @@ CheckApi.prototype = {
                         }
                     }
                 }
-            } else {
+            } /*else {
                 if(that.lastNotGetTime){
                     if(Date.now() - that.lastNotGetTime > 3600000) {
                         console.log("[南京交通拥堵指数]获取列表的接口[By Day]已经超过一个小时没有接收到数据了");
@@ -87,12 +87,12 @@ CheckApi.prototype = {
                     that.lastNotGetTime = Date.now();
                 }
                 console.log(error);
-            }
+            }*/
         })
     },
     checkServer:function(mailTo,sendSMS){
         var that = this;
-        console.log('check njjtzs server');
+        /*console.log('check njjtzs server');
         request(request_url,function(error,response,body) {
             if (error || !(response.statusCode == 200)) {
                 if (that.errorCount < 5) {
@@ -103,7 +103,7 @@ CheckApi.prototype = {
                     }
                 }
             }
-        });
+        });*/
     }
 };
 

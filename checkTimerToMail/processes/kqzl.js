@@ -70,7 +70,7 @@ CheckApi.prototype = {
                         that.errorCount=0;
                     }
                 }
-            } else {
+            } /*else {
                 if(that.lastNotGetTime) {
                     if (Date.now() - that.lastNotGetTime > 3600000) {
                         console.log("[南京空气污染指数]已经超过一个小时没有接收到数据了");
@@ -86,12 +86,12 @@ CheckApi.prototype = {
                     that.lastNotGetTime = Date.now();
                 }
                 console.log(error);
-            }
+            }*/
         })
     },
     checkServer:function(mailTo,sendSMS){
         var that = this;
-        console.log('check kqzl server');
+        /*console.log('check kqzl server');
         request(request_url,function(error,response,body){
             if(error || !(response.statusCode == 200)){
                 if (that.errorCount < 5) {
@@ -102,7 +102,7 @@ CheckApi.prototype = {
                     }
                 }
             }
-        });
+        });*/
     }
 };
 
