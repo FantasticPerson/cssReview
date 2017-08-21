@@ -45,7 +45,7 @@ CheckApi.prototype = {
                     // var cData = new Date();
                     // var cDay = cData.getDate(),cYear=cData.getFullYear(),cMonth=cData.getMonth(),hours=firstTime.split(':')[0],minutes=firstTime.split(':')[1];
                     // var generateTime = new Date(cYear,cMonth,cData,hours,minutes);
-                    // if(generateTime - cData >= 30*60*1000){
+                    // if(generateTime - cData >= 30*60*1000) {
                     //     errorArr.push([],[],[],[],[],[]);
                     // } else {
                         for (var i = 0, data = dataObj.Data, l = data.length; i < l; i++) {
@@ -114,11 +114,11 @@ CheckApi.prototype = {
                         that.errorCount = 0;
                     }
                 } else {
-                    if(that.errorCount > 0){
+                    if(that.errorCount < 5){
+                        that.errorCount++;
                         sendMail("[南京交通指数APP]交通拥堵指数数据异常通知[中威科技]", "[南京交通指数]服务异常通知。", index_url, '');
                         sendSMS("[南京交通指数APP]交通拥堵指数数据异常通知[中威科技]");
                     }
-                    that.errorCount = 0;
                 }
             } /*else {
                 if(that.lastNotGetTime){

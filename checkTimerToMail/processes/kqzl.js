@@ -69,6 +69,12 @@ CheckApi.prototype = {
                         }
                         that.errorCount=0;
                     }
+                } else {
+                    if(that.errorCount < 5){
+                        sendMail("[南京智慧环保APP]空气质量AQI数据异常通知[中威科技]", "[南京智慧环保]数据出现异常，请及时查看相关日志。", index_url, JSON.stringify(errorArr));
+                        sendSMS("[南京智慧环保APP]空气质量AQI数据异常通知[中威科技]");
+                        this.errorCount++;
+                    }
                 }
             } /*else {
                 if(that.lastNotGetTime) {

@@ -12,7 +12,7 @@ var checkJtDay = require('./processes/njjtzsDay').checkInit();
 checkJtDay.start();
 //接口和网站访问首页地址 //'3122859003@qq.com,1240172019@qq.com,guying@njnet.gov.cn,dengling@njnet.gov.cn'
 // var mailTo = "1240172019@qq.com",
-var mailTo = '358968224@qq.com,3122859003@qq.com,1240172019@qq.com,guying@njnet.gov.cn,dengling@njnet.gov.cn',//3122859003@qq.com,//,904179598@qq.com
+var mailTo = 'feicheng@njnet.gov.cn,358968224@qq.com,3122859003@qq.com,1240172019@qq.com,guying@njnet.gov.cn,dengling@njnet.gov.cn',//3122859003@qq.com,//,904179598@qq.com
 	sendFromConfig = {
         user: '3122859003@qq.com',
         pass: 'dkfjouznvuesdeef' //qq邮箱生成的授权码 //dkfjouznvuesdeef
@@ -101,7 +101,7 @@ Main.prototype = {
 	sendPhoneMsgTo:function(msg){
 		var baseUrl = 'http://10.101.2.71:8999/CallSMSPlatform/sendMsg';
 		// var phoneArr = ['13818184608'];
-		var phoneArr = ['13818184608','18115180746','18806293606','13815892936','18751897319'];//'17798860825','18994295576','15962847365','13815892936','18751897319'
+		var phoneArr = ['13818184608','18115180746','18806293606','13815892936','17361872599'];//'17798860825','18994295576','15962847365','13815892936','18751897319'
         var url = baseUrl+'?phoneNum='+phoneArr.join(';')+'&msgContent='+encodeURL(msg);
 		request(url,function(error,response,body){
 			if(error || response.statusCode != 200){
